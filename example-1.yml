@@ -1,0 +1,12 @@
+---
+- name: A sample playbook showing user prompt
+  hosts: localhost
+  gather_facts: False
+  tasks: 
+  - name: "Prompt for user response"
+    user_prompt:
+
+  - name: "Task next to the prompt"
+    debug:
+      msg: "Hello, user agrees to run me!"
+

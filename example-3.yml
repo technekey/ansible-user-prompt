@@ -1,0 +1,22 @@
+---
+- name: A sample playbook showing when there are multiple play in the same playbook
+  hosts: localhost
+  gather_facts: False
+  tasks: 
+  - name: "Prompt for user response"
+    user_prompt:
+      prompt: "Do you want to continue with the playbook execution??? This once more...... ?(y/n)?"
+      passing_response: ['y','yes']
+      abort_response: ['n','N','no','NO']
+
+  - name: "Task next to the prompt"
+    debug:
+      msg: "Hello, user agrees to run me!"
+
+- hosts: localhost
+  gather_facts: False
+  tasks:
+  - name: "Task in another play "
+    debug:
+      msg: "Hello from another play!"
+

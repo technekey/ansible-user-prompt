@@ -1,0 +1,17 @@
+---
+- name: A sample playbook showing that prompt can be controlled by when clause
+  hosts: localhost
+  gather_facts: False
+  tasks: 
+  - name: "Prompt for user response"
+    user_prompt:
+      prompt: "Do you want to continue with the playbook execution??? This once more...... ?(y/n)?"
+      passing_response: ['y','yes']
+      abort_response: ['n','N','no','NO']
+    when: not (disable_prompt|default(false))
+
+  - name: "Task next to the prompt"
+    debug:
+      msg: "Hello, user agrees to run me!"
+
+
