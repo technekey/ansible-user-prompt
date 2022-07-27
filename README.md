@@ -30,6 +30,25 @@ tree
 2 directories, 7 files
 ````
 
+
+The task may look as simple as:
+````
+  - name: "Prompt for user response"
+    user_prompt:
+````
+
+OR it may use custom values
+
+````
+  - name: "Prompt for user response"
+    user_prompt:
+      prompt: "Do you want to continue with {{action}} of {{user}} user?(y/n)?"
+      passing_response: ['y','yes']
+      abort_response: ['n','no']
+    vars:
+      action: "deletion"
+      user: "foobar"
+````
 #### Execution Example:
 
 When incorrect input is supplied, the playbook would keep prompting until a right input is supplied. Later, "no" is provided causing playbook to abort.
