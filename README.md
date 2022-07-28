@@ -145,4 +145,4 @@ localhost                  : ok=1    changed=0    unreachable=0    failed=0    s
 ````
 #### more info:
 
-Visit https://technekey.com 
+https://technekey.com/category/tech/scripting/
