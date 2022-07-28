@@ -145,4 +145,4 @@ localhost                  : ok=1    changed=0    unreachable=0    failed=0    s
 ````
 #### more info:
 
-https://technekey.com/category/tech/scripting/
+https://technekey.com/user-prompt-in-ansible-playbook/
