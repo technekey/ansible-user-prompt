@@ -25,9 +25,17 @@ def _sig_alarm(sig, tb):
 
 class ActionModule(ActionBase):
    
-    
+    # Colours
+    pure_red = "\033[0;31m"
+    dark_green = "\033[0;32m"
+    bold = "\033[1m"
+    underline = "\033[4m"
+    italic = "\033[3m"
+    darken = "\033[2m"
+    reset_colour = '\033[0m'
+
     #by default colored prompt is disabled
-    colored_enabled = False
+    colored_enabled = True
     #user should provide these values 
     user_input_args = ['prompt','passing_response','abort_response','timeout']
 
@@ -109,7 +117,7 @@ class ActionModule(ActionBase):
             while True:
                 ANSIBLE_FORCE_COLOR=True
                 if self.colored_enabled:
-                    user_response = input(f'{prompt} {passing_response} {abort_response}\r\n \x1b[6;30;42m  [Enter your response]:\x1b[0m')
+                    user_response = input(f'{self.dark_green}{prompt} {passing_response} {abort_response}\r\n[Enter your response]:{self.reset_colour}')
                 else:
                     user_response = input(f'{prompt} {passing_response} {abort_response}\r\n[Enter your response]:')
                 if user_response in passing_response:
@@ -119,7 +127,10 @@ class ActionModule(ActionBase):
                 elif user_response in abort_response:
                     return {"failed": True, "msg": "User selected to abort."}
                 else:
-                    print(f'Invalid response!, expecting one from {str(passing_response)} or {str(abort_response)}')
+                    if self.colored_enabled:
+                        print(f'{self.pure_red}Invalid response!, expecting one from {str(passing_response)} or {str(abort_response)}{self.reset_colour}')
+                    else:
+                        print(f'Invalid response!, expecting one from {str(passing_response)} or {str(abort_response)}')
 
         except TimeoutError:
             return {"failed": True, "msg": f"TimeoutError happened waiting for user response, waited {timeout} seconds"}
